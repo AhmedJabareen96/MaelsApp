@@ -8,8 +8,16 @@ function MealsOverviewScreen({ navigation, route }) {
     // const categoryId = useRoute().params.categoryId; // alternative way
 
     const renderMealItem = (itemData) => {
+        const item = itemData.item;
+        const objProps = {
+            title: item.title,
+            imageUrl: item.imageUrl,
+            duration: item.duration,
+            complexity: item.complexity,
+            affordability: item.affordability
+        }
         return (
-            <MealItem title={itemData.item.title} imageUrl={itemData.item.imageUrl}>{itemData.item.title}</MealItem>
+            <MealItem {...objProps}>{itemData.item.title}</MealItem>
         );
     }
 
@@ -19,11 +27,11 @@ function MealsOverviewScreen({ navigation, route }) {
     });
   return (
     <View style={styles.container}>
-              <FlatList key={'#'}
+              <FlatList
                 data={displayedItems} 
                 keyExtractor={(item) => item.id} 
                 renderItem={(renderMealItem)}
-                numColumns={2}/>
+                />
     </View>
     
   )
