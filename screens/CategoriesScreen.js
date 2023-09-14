@@ -12,7 +12,8 @@ function CategoriesScreen({ navigation }) {
   const renderCategoryItem = (itemData) => {
     const pressHandler = () => {
         navigation.navigate('MealsOverview', {
-          categoryId: itemData.item.id
+          categoryId: itemData.item.id,
+          categoryTitle: itemData.item.title
         });
     }
     return (
