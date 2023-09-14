@@ -19,7 +19,7 @@ export default function App() {
             {
               headerStyle: {
                 backgroundColor:'#351401' },
-                headerTintColor:'light', 
+                headerTintColor:'white', 
                 contentStyle:{backgroundColor:'#352f25'}
             }
           }>
@@ -34,7 +34,13 @@ export default function App() {
                   title: categoryId
                 });
             }}/>
-            <Stack.Screen name='MealDetails' component={MealDetailScreen}/>
+            <Stack.Screen name='MealDetails' component={MealDetailScreen}
+              // options={{
+              //   headerRight: () => {
+              //     return <Text style={{fontSize: 30, color: 'white'}}>+</Text>
+              //   }
+              // }}
+            />
           </Stack.Navigator>
       </NavigationContainer>
       </View>
