@@ -1,20 +1,38 @@
 import { useNavigation, useRoute } from '@react-navigation/native'
-import React, { useLayoutEffect } from 'react'
-import {View, Text, Image, StyleSheet, ScrollView} from 'react-native'
+import React, { useContext, useLayoutEffect } from 'react'
+import {View, Text, Image, StyleSheet, ScrollView, Pressable} from 'react-native'
 import { MEALS } from '../data/dummy-data';
 import MealDetails from '../components/MealDetails';
+import { FavouritesContext } from '../store/context/fsvourite-context';
 function MealDetailScreen({ route, navigation}) {
+
+    
+    const favCtx = useContext(FavouritesContext);
     const nav = useRoute();
     const meal = MEALS.find(item => item.id === nav.params.mealId);
 
     const headerButtonHandrel = () => {
-      
+      if(!mealIsFavourite){
+        favCtx.addFavourite(nav.params.mealId);
+      }
+      else {
+        favCtx.removeFavourite(nav.params.mealId);
+      }
     }
+    
+    const mealIsFavourite = favCtx.ids.includes(nav.params.mealId);
+
 
     useLayoutEffect(() => { 
       navigation.setOptions({
         headerRight: () => {
-          return <Text style={{fontSize:25, color: 'white'}}>+</Text>
+          return (
+            <Pressable onPress={headerButtonHandrel}>
+                <Text style={{fontSize:25, color: 'white'}}>{
+                  mealIsFavourite ? '-' : '+'
+                }</Text>
+            </Pressable>
+          );
         }
       });
     },[navigation, headerButtonHandrel]);
