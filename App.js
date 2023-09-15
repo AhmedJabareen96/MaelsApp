@@ -9,7 +9,7 @@ import MealDetailScreen from './screens/MealDetailScreen';
 import FavouritesContextProvider from './store/context/fsvourite-context';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import FavouritesScreen from './screens/FavouritesScreen';
-
+import { Ionicons } from '@expo/vector-icons'
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -21,11 +21,24 @@ const DrawerNavigator = () => {
           headerStyle: {
           backgroundColor:'#351401' },
           headerTintColor:'white', 
-          sceneContainerStyle:{backgroundColor:'#352f25'}
+          sceneContainerStyle:{backgroundColor:'#352f25'},
+          drawerContentStyle: {
+            backgroundColor: '#351401'
+          },
+          drawerInactiveTintColor:'white',
+          drawerActiveTintColor:'#351401',
+          drawerActiveBackgroundColor: '#e4baa1'
+
         }
       }> 
-          <Drawer.Screen name="Categories" component={CategoriesScreen} />
-          <Drawer.Screen name="Favourites Screen" component={FavouritesScreen} />
+          <Drawer.Screen name="All Categories" component={CategoriesScreen} options={{
+            drawerIcon: ({color, size}) => <Ionicons color={color} size={size} name='list'/> 
+          }}/>
+          <Drawer.Screen name="Favourites Screen" component={FavouritesScreen} options={
+            {
+              drawerIcon: ({color, size}) => <Ionicons color={color} size={size} name='bookmarks-outline'/>
+            }
+          }/>
       </Drawer.Navigator>
 
     );
@@ -59,11 +72,11 @@ export default function App() {
                 });
             }}/>
             <Stack.Screen name='MealDetails' component={MealDetailScreen}
-              // options={{
-              //   headerRight: () => {
-              //     return <Text style={{fontSize: 30, color: 'white'}}>+</Text>
-              //   }
-              // }}
+              options={
+                {
+                  title: "About The Meal"
+                }
+              }
             />
           </Stack.Navigator>
       </NavigationContainer>
