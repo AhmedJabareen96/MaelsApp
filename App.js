@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MealsOverviewScreen from './screens/MealsOverviewScreen';
 import MealDetailScreen from './screens/MealDetailScreen';
+import FavouritesContextProvider from './store/context/fsvourite-context';
 
 
 const Stack = createNativeStackNavigator();
@@ -14,6 +15,7 @@ export default function App() {
     <>
     <View style={styles.container}>
       <StatusBar style='light'/>
+      <FavouritesContextProvider>
       <NavigationContainer>
           <Stack.Navigator initialRouteName='MealsCategories' screenOptions={
             {
@@ -43,6 +45,7 @@ export default function App() {
             />
           </Stack.Navigator>
       </NavigationContainer>
+      </FavouritesContextProvider>
       </View>
     </>
   );
